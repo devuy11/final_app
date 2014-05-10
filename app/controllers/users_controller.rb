@@ -53,6 +53,21 @@ class UsersController < ApplicationController
     #@user = User.find(params[:id])
   end
 
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'  
+  end
+
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   private
 
     def user_params
@@ -67,5 +82,12 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
+    #def current_user?
+      #unless current_user.nil?
+      # current_user == @user
+     # end
+    #end
+
 
 end
