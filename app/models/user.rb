@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
 	end
 
 	def feed_var
-    	Micropost.where("user_id = ?", id)
+		Micropost.from_users_followed_by(self)
+    	#Micropost.where("user_id = ?", id)
   	end
 
   	def following?(other_user)
