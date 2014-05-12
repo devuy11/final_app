@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "followed_id",class_name:  "Relationship",dependent:   :destroy
   	has_many :followers, through: :reverse_relationships, source: :follower
   	has_many :followed_users, through: :relationships, source: :followed
+  	has_many :likes, foreign_key: "user_id", dependent: :destroy
 
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
@@ -37,6 +38,23 @@ class User < ActiveRecord::Base
 	def unfollow!(other_user)
 	    relationships.find_by(followed_id: other_user.id).destroy
 	end
+
+	def likepost(other_post)
+		likes.create!(micropost_id: other_post.id)
+	end
+
+	def unlikepost(other_post)
+		likes.find_by(micropost_id: other_post.id).destroy
+	end
+
+	def posts_liked_by_me
+		Micropost.where(id: self.likes.pluck(:micropost_id))
+	end
+
+	def is_post_liked_by_me?(other_post)
+		likes.find_by(micropost_id: other_post.id)
+	end
+
 
   private
 

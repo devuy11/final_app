@@ -4,6 +4,7 @@ namespace :db do
     make_users
     make_microposts
     make_relationships
+    make_likes
   end
 end
 
@@ -26,10 +27,17 @@ end
 
 def make_microposts
   users = User.all(limit: 6)
-  50.times do
-    content = Faker::Lorem.sentence(5)
-    users.each { |user| user.microposts.create!(content: content) }
-  end
+  users.each {
+    |user|
+    50.times do
+      content = Faker::Lorem.sentence(5)  
+      user.microposts.create!(content: content)
+    end  
+  }
+  #50.times do
+   # content = Faker::Lorem.sentence(5)
+   # users.each { |user| user.microposts.create!(content: content) }
+  #end
 end
 
 def make_relationships
@@ -39,4 +47,20 @@ def make_relationships
   followers      = users[3..40]
   followed_users.each { |followed| user.follow!(followed) }
   followers.each      { |follower| follower.follow!(user) }
+end
+
+
+def make_likes
+  x=10
+  users = User.all
+  mics = users.find(1).microposts.first(10)
+  grp= users[2..20]
+
+  mics.each {
+    |mic|
+    grp.each { 
+      |gp|
+      gp.likepost(mic)
+    }
+  }
 end

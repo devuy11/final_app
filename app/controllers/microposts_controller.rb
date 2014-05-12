@@ -16,6 +16,14 @@ class MicropostsController < ApplicationController
     @micropost.destroy
     redirect_to root_url
   end
+  
+  def users_liked
+    @title = "Liked Users"
+    @micropost = Micropost.find(params[:id])
+    @users = User.where(id: @micropost.likes.pluck(:user_id)).paginate(page: params[:page])
+    # debugger
+    render 'show_likes'
+  end
 
   private
 

@@ -1,0 +1,12 @@
+<div class="span8">
+	<% @users.each do %>
+	<% |x| %>
+	<li class="devuy11">
+			<%= link_to gravatar_for(x), x %>
+			<%= x.name %>
+	</li>
+	<%end%>
+	<%= will_paginate @users%>
+    
+  </div>
+</div>

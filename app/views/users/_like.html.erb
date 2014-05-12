@@ -1,0 +1,5 @@
+<%= form_for(current_user.likes.build(micropost_id: @micropost.id),
+             remote: true) do |f| %>
+  <div><%= f.hidden_field :micropost_id %></div>
+  <%= f.submit "Like", class: "devu2 like2 button2" %>
+<% end %>

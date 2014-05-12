@@ -1,0 +1,20 @@
+<% if current_user.is_post_liked_by_me?(post).nil? %>
+	<%= render partial: 'shared/like', locals: { vari: post } %>
+	<% if (post.likes.count)!=0 %>
+	<%= link_to (post.likes.count).to_s, users_liked_micropost_path(post) %>
+	<%=" people liked it"%>
+	<%end%>
+<% else %>
+	<%= render partial: 'shared/unlike', locals: { vari: post }  %>
+	<%= link_to "You" , current_user %>
+	<% if (post.likes.count-1) != 0 %>
+	<%= "and " %>
+	<%= link_to (post.likes.count-1).to_s, users_liked_micropost_path(post) %>
+	<%=" people liked it"%>
+	<%else%>
+	<%="liked it"%>
+	<%end%>
+<% end %>
+<span class="timestamp">
+    Posted <%= time_ago_in_words(post.created_at) %> ago.
+</span>
