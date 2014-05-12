@@ -1,0 +1,2 @@
+<% content = render(partial: "shared/#{@part}", locals: {@part.to_sym => @post}) %>
+jQuery("li#" + <%= @post.id.to_s %>).replaceWith("<%= escape_javascript(content) %>");

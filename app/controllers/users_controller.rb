@@ -15,9 +15,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user=User.where(id: params[:id])
+    if @user.empty?
+      @user = nil
+    else
+      @user = User.find(params[:id])
+      @microposts = @user.microposts.paginate(page: params[:page])
+    end
+    #@user = User.find(params[:id])
     #debugger
-    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def update
@@ -77,7 +83,10 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to @user unless current_user==(@user)
+      unless current_user==(@user)
+          redirect_to @user 
+          flash[:error] = "You cannot Edit some other people data"
+      end
     end
 
     def admin_user

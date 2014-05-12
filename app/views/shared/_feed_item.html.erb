@@ -5,7 +5,7 @@
     </span>
     <span class="content"><%= feed_item.content %></span>
 
-    <%= render partial: 'shared/post_common', locals: { post: feed_item } %>
+    <%= render partial: 'shared/post_common', locals: { post: feed_item, is_profile: "0" } %>
 
   <% if current_user==(feed_item.user) %>
     <%= link_to "delete", feed_item, method: :delete,
