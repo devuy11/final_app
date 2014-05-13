@@ -1,5 +1,6 @@
 <li id="<%= mylike_item.id %>">
-    <span class="content"><%= mylike_item.content %></span>
+    <span class="content"><%= (return_emoticon(mylike_item.content.to_s)) %></span>
+
 
     <%= render partial: 'shared/post_common', locals: { post: mylike_item, is_profile: "1" } %>
 

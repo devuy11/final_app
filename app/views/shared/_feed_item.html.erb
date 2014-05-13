@@ -3,7 +3,7 @@
     <span class="user">
       <%= link_to feed_item.user.name, feed_item.user %>
     </span>
-    <span class="content"><%= feed_item.content %></span>
+    <span class="content"><%= (return_emoticon(feed_item.content.to_s)) %></span>
 
     <%= render partial: 'shared/post_common', locals: { post: feed_item, is_profile: "0" } %>
 
