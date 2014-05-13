@@ -1,12 +1,49 @@
-<div class="span8">
+<div class="row">
 
-	<% @users.each do %>
-	<% |x| %>
-	<li class="devuy11">
-			<%= link_to gravatar_for(x), x %>
-			<%= x.name %>
-	</li>
+	<%$len = @users.length%>
+	<%$y = 0%>
+
+	<% while $y<$len do %>
+
+		<% if $len-$y >=3 %>
+			<div class="container users">
+			   <div class="column-center">
+			   		<%= link_to gravatar_for(@users[$y]), @users[$y] %>
+					<%= link_to @users[$y].name.to_s,@users[$y] %>
+			   </div>
+			   <div class="column-left">
+			   		<%= link_to gravatar_for(@users[$y+1]), @users[$y+1] %>
+					<%= link_to @users[$y+1].name.to_s,@users[$y+1] %>
+			   </div>
+			   <div class="column-right">
+			   		<%= link_to gravatar_for(@users[$y+2]), @users[$y+2] %>
+					<%= link_to @users[$y+2].name.to_s,@users[$y+2] %>
+			   </div>
+			</div>
+		<%else%>
+			<% if ($len-$y) == 1 %>
+				<div class="container users">
+				   <div class="column-left">
+				   		<%= link_to gravatar_for(@users[$y]), @users[$y] %>
+						<%= link_to @users[$y].name.to_s,@users[$y] %>
+				   </div>
+				</div>
+			<%else%>
+				<div class="column-center">
+			   		<%= link_to gravatar_for(@users[$y]), @users[$y] %>
+					<%= link_to @users[$y].name.to_s,@users[$y] %>
+			   </div>
+			   <div class="column-left">
+			   		<%= link_to gravatar_for(@users[$y+1]), @users[$y+1] %>
+					<%= link_to @users[$y+1].name.to_s,@users[$y+1] %>
+			   </div>
+			<%end%>
+		<%end%>
+		<%$y = $y + 3%>
+
 	<%end%>
+
+	
 	<%= will_paginate @users%>
     
   

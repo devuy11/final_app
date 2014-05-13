@@ -246,3 +246,8 @@ aside {
     margin: 1px 1px;
   }
 }
+
+
+.column-left{ float: left; width: 33%; padding: 14px 0;}
+.column-right{ float: right; width: 33%; padding: 14px 0;}
+.column-center{ display: inline-block; width: 33%; padding: 14px 0;}

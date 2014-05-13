@@ -1,5 +1,5 @@
 <%= form_for(current_user.likes.find_by(micropost_id: vari.id),
              html: { method: :delete },remote: true) do |f| %>
 <div><%= hidden_field_tag :is_profile, is_profile %></div>
-  <%= f.submit "Unlike", class: "devu2 like2 button3" %>
+  <%= f.submit "Unlike", class: "devu2 like2 button3 btn btn-warning btn-xs" %>
 <% end %>

@@ -21,7 +21,7 @@ class MicropostsController < ApplicationController
   def users_liked
     @title = "Liked Users"
     @micropost = Micropost.find(params[:id])
-    @users = User.where(id: @micropost.likes.pluck(:user_id)).paginate(page: params[:page])
+    @users = User.where(id: @micropost.likes.pluck(:user_id)).paginate(page: params[:page],:per_page => 15)
     # debugger
     render 'show_likes'
   end
